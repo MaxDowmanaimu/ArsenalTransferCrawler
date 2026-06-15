@@ -1,0 +1,23 @@
+recipient: maxdowman1231@outlook.com
+lookback_hours: 24
+max_items: 25
+timezone: Europe/London
+send_time: "08:00"
+sources:
+  - name: Arsenal.com
+    url: https://www.arsenal.com/news/rss
+    credibility: 100
+  - name: BBC Sport - Arsenal
+    url: https://feeds.bbci.co.uk/sport/football/rss.xml
+    credibility: 92
+    include_keywords: [Arsenal, Gunners, transfer, signing, loan]
+  - name: Sky Sports - Arsenal
+    url: https://www.skysports.com/rss/12040
+    credibility: 88
+  - name: The Guardian - Arsenal
+    url: https://www.theguardian.com/football/arsenal/rss
+    credibility: 86
+  - name: ESPN FC - Arsenal
+    url: https://www.espn.com/espn/rss/soccer/news
+    credibility: 78
+    include_keywords: [Arsenal, Gunners]
