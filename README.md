@@ -70,7 +70,6 @@ Run at 08:00 every day on a server:
 ```
 
 ### GitHub Actions
-
 The workflow in `.github/workflows/daily-digest.yml` can run the digest at 08:00 UTC. Add `GMAIL_ADDRESS` and `GMAIL_APP_PASSWORD` as repository secrets before enabling it.
 
 ## How ranking works

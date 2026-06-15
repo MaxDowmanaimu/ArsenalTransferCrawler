@@ -16,7 +16,7 @@ This repository contains a Python command-line tool that collects Arsenal transf
 
 ## Development notes
 
-- Do not commit real Gmail addresses, app passwords, or private email passwords.
+- Do not commit real Gmail addresses, app passwords, or private email passwords
 - Prefer RSS/Atom feeds or official APIs over scraping HTML pages where possible.
 - Keep source credibility values explicit in configuration so rankings are easy to audit.
 - If adding a source, include keywords when the feed is broad and not Arsenal-specific.
