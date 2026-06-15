@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arsenal-transfer-crawler"
+version = "0.1.0"
+description = "Daily Arsenal transfer news crawler and email digest"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+arsenal-transfer-crawler = "arsenal_transfer_crawler.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
