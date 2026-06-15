@@ -8,7 +8,7 @@ This repository contains a Python command-line tool that collects Arsenal transf
 
 - `src/arsenal_transfer_crawler/config.py` defines default sources, keywords, and YAML configuration loading.
 - `src/arsenal_transfer_crawler/crawler.py` fetches feeds, filters Arsenal transfer stories, deduplicates items, and ranks results.
-- `src/arsenal_transfer_crawler/emailer.py` renders the HTML template and sends email through SMTP environment variables.
+- `src/arsenal_transfer_crawler/emailer.py` renders the HTML template and sends email through Gmail SMTP environment variables.
 - `src/arsenal_transfer_crawler/cli.py` provides the `once` and `schedule` commands.
 - `src/arsenal_transfer_crawler/emailer.py` controls the visual email layout through inline HTML/CSS.
 - `config.example.yml` shows runtime configuration.
@@ -16,7 +16,7 @@ This repository contains a Python command-line tool that collects Arsenal transf
 
 ## Development notes
 
-- Do not commit real SMTP credentials or private email passwords.
+- Do not commit real Gmail addresses, app passwords, or private email passwords
 - Prefer RSS/Atom feeds or official APIs over scraping HTML pages where possible.
 - Keep source credibility values explicit in configuration so rankings are easy to audit.
 - If adding a source, include keywords when the feed is broad and not Arsenal-specific.

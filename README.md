@@ -10,7 +10,7 @@ A small Python tool that collects Arsenal transfer news from trusted football ne
 - Generates a polished HTML email with source, credibility score, publication time, summary, and source link.
 - Supports one-off dry runs and a long-running daily scheduler.
 - Uses only Python standard-library modules at runtime, so deployment is simple.
-- Keeps SMTP credentials in environment variables instead of source code.
+- Keeps Gmail app-password credentials in environment variables instead of source code.
 
 ## Setup
 
@@ -23,22 +23,20 @@ cp config.example.yml config.yml
 
 Edit `config.yml` if you want to adjust sources, the lookback window, or the send time.
 
-## Email configuration
+## Gmail configuration
 
-Set these environment variables before sending email:
+The sender uses Gmail SMTP. Create a Gmail app password in your Google Account security settings, then set these environment variables before sending email:
 
 ```bash
-export SMTP_HOST="smtp.office365.com"
-export SMTP_PORT="587"
-export SMTP_FROM="your-sender@example.com"
-export SMTP_USERNAME="your-sender@example.com"
-export SMTP_PASSWORD="your-app-password"
+export GMAIL_ADDRESS="your-gmail-address@gmail.com"
+export GMAIL_APP_PASSWORD="your-16-character-app-password"
 ```
 
-Optional:
+Optional overrides are available if Gmail changes SMTP endpoints, but the defaults are `smtp.gmail.com` and port `587`:
 
 ```bash
-export SMTP_SSL="true"
+export GMAIL_SMTP_HOST="smtp.gmail.com"
+export GMAIL_SMTP_PORT="587"
 ```
 
 ## Usage
@@ -72,8 +70,7 @@ Run at 08:00 every day on a server:
 ```
 
 ### GitHub Actions
-
-The workflow in `.github/workflows/daily-digest.yml` can run the digest at 08:00 UTC. Add the SMTP settings as repository secrets before enabling it.
+The workflow in `.github/workflows/daily-digest.yml` can run the digest at 08:00 UTC. Add `GMAIL_ADDRESS` and `GMAIL_APP_PASSWORD` as repository secrets before enabling it.
 
 ## How ranking works
 

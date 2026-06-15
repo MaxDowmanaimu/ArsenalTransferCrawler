@@ -53,9 +53,13 @@ def render_report(items: list[NewsItem], errors: list[str]) -> str:
 </html>"""
 
 
+GMAIL_SMTP_HOST = "smtp.gmail.com"
+GMAIL_SMTP_PORT = 587
+
+
 def build_message(recipient: str, html: str) -> EmailMessage:
     message = EmailMessage()
-    sender = os.environ["SMTP_FROM"]
+    sender = os.environ["GMAIL_ADDRESS"]
     message["From"] = sender
     message["To"] = recipient
     message["Subject"] = "Arsenal transfer news digest"
@@ -65,17 +69,19 @@ def build_message(recipient: str, html: str) -> EmailMessage:
 
 
 def send_email(recipient: str, html: str) -> None:
-    host = os.environ["SMTP_HOST"]
-    port = int(os.environ.get("SMTP_PORT", "587"))
-    username = os.environ.get("SMTP_USERNAME")
-    password = os.environ.get("SMTP_PASSWORD")
-    use_ssl = os.environ.get("SMTP_SSL", "false").casefold() == "true"
+    """Send the rendered digest through Gmail SMTP.
+
+    Gmail requires an app password for SMTP when two-step verification is enabled.
+    Configure `GMAIL_ADDRESS` with the sender address and `GMAIL_APP_PASSWORD`
+    with the app password generated in the Google Account security settings.
+    """
+    gmail_address = os.environ["GMAIL_ADDRESS"]
+    gmail_app_password = os.environ["GMAIL_APP_PASSWORD"]
+    host = os.environ.get("GMAIL_SMTP_HOST", GMAIL_SMTP_HOST)
+    port = int(os.environ.get("GMAIL_SMTP_PORT", str(GMAIL_SMTP_PORT)))
 
     message = build_message(recipient, html)
-    smtp_cls = smtplib.SMTP_SSL if use_ssl else smtplib.SMTP
-    with smtp_cls(host, port, timeout=30) as server:
-        if not use_ssl:
-            server.starttls()
-        if username and password:
-            server.login(username, password)
+    with smtplib.SMTP(host, port, timeout=30) as server:
+        server.starttls()
+        server.login(gmail_address, gmail_app_password)
         server.send_message(message)
